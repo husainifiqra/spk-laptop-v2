@@ -816,6 +816,23 @@ if st.session_state.username:
 
 # ---------- 7. WATERMARK ----------
 st.markdown(
-    '<div class="watermark">Dibuat oleh @Kelompok Batuphat © 2025</div>',
+    """
+    <style>
+    .watermark {
+        position: fixed;
+        bottom: 40px; 
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.5);
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        z-index: 100;
+        pointer-events: none;
+        font-family: 'Arial', sans-serif;
+    }
+    </style>
+    <div class="watermark">Dibuat oleh @Kelompok Batuphat © 2025</div>
+    """,
     unsafe_allow_html=True,
 )
+
