@@ -19,60 +19,249 @@ st.set_page_config(
 # --- CSS Kustom untuk Tampilan Modern ---
 st.markdown(
     """
-<style>
-    /* --- Font dan Warna Dasar --- */
-    html, body, [class*="css"] {
-        font-family: 'Inter', sans-serif;
-        background-color: #f0f2f6; /* Latar belakang abu-abu muda */
-        color: #1a1a1a;
+    <style>
+    /* --- Variabel dan Warna --- */
+    :root {
+        --primary: #6c5ce7;
+        --primary-light: #a55eea;
+        --bg: #f5f7ff;
+        --card-bg: #ffffff;
+        --text: #2d3436;
+        --text-light: #636e72;
+        --border: #e0e0e0;
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        --radius: 16px;
     }
+    
+    /* --- Font dan Warna Dasar --- */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    html, body, [class*="css"] {
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+    }
+    
     /* --- Sidebar --- */
     .css-1d391kg {
-        background-color: #ffffff;
-        border-right: 1px solid #e6e6e6;
+        background: var(--card-bg) !important;
+        box-shadow: 4px 0 15px rgba(0, 0, 0, 0.05);
+        border-right: 1px solid var(--border);
     }
+    
+    /* --- Card Styling --- */
+    .stCard {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .stCard:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .stCard .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--primary);
+        display: inline-block;
+    }
+    
     /* --- Tombol Utama --- */
     .stButton>button {
-        background-color: #6c5ce7; /* Warna ungu modern */
+        background: linear-gradient(45deg, var(--primary), var(--primary-light));
         color: white;
-        padding: 0.6rem 1.5rem;
-        border-radius: 10px;
+        padding: 0.75rem 1.75rem;
+        border-radius: 12px;
         border: none;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 14px 0 rgba(108, 92, 231, 0.2);
         width: 100%;
+        font-size: 0.9rem;
+        position: relative;
+        overflow: hidden;
     }
+    
     .stButton>button:hover {
-        background-color: #5848c4;
+        background: linear-gradient(45deg, var(--primary), var(--primary-light));
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.12);
+        box-shadow: 0 8px 25px 0 rgba(108, 92, 231, 0.3);
     }
+    
     .stButton>button:active {
-        background-color: #4535a1;
         transform: translateY(0);
     }
+    
     /* --- Judul Halaman --- */
-    h1, h2, h3 {
-        color: #1a1a1a;
+    h1, h2, h3, h4 {
+        color: #2d3436;
         font-weight: 700;
+        margin-bottom: 1rem;
     }
-    h1 { color: #6c5ce7; }
+    
+    h1 { 
+        color: #6c5ce7;
+        font-size: 2.5rem;
+        margin-top: 0;
+        position: relative;
+        display: inline-block;
+    }
+    
+    h1:after {
+        content: '';
+        position: absolute;
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #6c5ce7, #a55eea);
+        bottom: -10px;
+        left: 0;
+        border-radius: 2px;
+    }
+    
     /* --- Kontainer dan Kartu --- */
     .stApp > header {
-        background-color: transparent;
+        background: transparent;
+        box-shadow: none;
     }
+    
     .main .block-container {
-        padding: 2rem 3rem;
+        padding: 2rem 4rem;
+        max-width: 1400px;
+    }
+    
+    /* --- Kartu --- */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 10px;
+        margin-bottom: 2rem;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background-color: #6c5ce7;
+        color: white !important;
+    }
+    
+    /* Tabel */
+    .stDataFrame {
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        background: var(--card-bg);
+    }
+    
+    /* Header Tabel */
+    .stDataFrame thead th {
+        background-color: var(--primary) !important;
+        color: white !important;
+        font-weight: 500;
+    }
+    
+    /* Baris Tabel */
+    .stDataFrame tbody tr {
+        transition: all 0.3s ease;
+    }
+    
+    .stDataFrame tbody tr:hover {
+        background-color: rgba(108, 92, 231, 0.05) !important;
+    }
+    
+    /* Input Fields */
+    .stTextInput>div>div>input, 
+    .stNumberInput>div>div>input,
+    .stSelectbox>div>div>div,
+    .stTextArea>div>div>textarea {
+        border-radius: 10px !important;
+        border: 1px solid var(--border) !important;
+        padding: 0.75rem 1rem !important;
+        transition: all 0.3s ease !important;
+        background-color: var(--card-bg) !important;
+        color: var(--text) !important;
+    }
+    
+    .stTextInput>div>div>input:focus, 
+    .stNumberInput>div>div>input:focus,
+    .stSelectbox>div>div>div:focus,
+    .stTextArea>div>div>textarea:focus {
+        border-color: var(--primary) !important;
+        box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.2) !important;
+    }
+    
+    /* Notifikasi */
+    .stAlert {
+        border-radius: var(--radius) !important;
+        padding: 1rem !important;
+        border-left: 4px solid var(--primary) !important;
+        background-color: rgba(255, 255, 255, 0.9) !important;
+        box-shadow: var(--shadow);
+    }
+    
+    /* Tab */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 5px;
+        margin-bottom: 2rem;
+        background: var(--card-bg);
+        padding: 0.5rem;
+        border-radius: 12px;
+        display: inline-flex;
+        box-shadow: var(--shadow);
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        color: var(--text-light);
+        background: transparent;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: var(--primary) !important;
+        color: white !important;
+        box-shadow: 0 4px 12px rgba(108, 92, 231, 0.2);
+    }
+    
+    /* Responsif */
+    @media (max-width: 768px) {
+        .main .block-container {
+            padding: 1.5rem 1rem;
+        }
+        
+        h1 {
+            font-size: 2rem;
+        }
     }
     /* --- Watermark --- */
     .watermark {
         position: fixed;
         bottom: 10px;
         right: 15px;
-        font-size: 0.75rem;
-        color: #b0b0b0;
+        font-size: 0.85rem;
+        color: #6c5ce7;
         z-index: 9999;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 5px 10px;
+        border-radius: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 </style>
 """,
@@ -814,25 +1003,4 @@ def show_main_app():
 if st.session_state.username:
     show_main_app()
 
-# ---------- 7. WATERMARK ----------
-st.markdown(
-    """
-    <style>
-    .watermark {
-        position: fixed;
-        bottom: 40px; 
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.5);
-        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-        z-index: 100;
-        pointer-events: none;
-        font-family: 'Arial', sans-serif;
-    }
-    </style>
-    <div class="watermark">Dibuat oleh @Kelompok Batuphat © 2025</div>
-    """,
-    unsafe_allow_html=True,
-)
 
