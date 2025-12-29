@@ -281,7 +281,7 @@ if "edited_data" not in st.session_state:
 # ---------- 3. HALAMAN LANDING & LOGIN ----------
 def show_landing_page():
     """Menampilkan halaman perkenalan aplikasi."""
-    st.title("🚀 Selamat Datang di SPK Laptop Pro")
+    st.title("🚀 Selamat Datang di SPK Laptop Sketsa Multimedia")
     st.image(
         "logo2.png",
         width=200,
